@@ -15,3 +15,5 @@ A fork of [Auto Close Tag](https://github.com/formulahendry/vscode-auto-close-ta
 - `<#noparse>`
 - `<#outputformat>`
 - `<#switch>`
+
+![Usage](./assets/usage.gif)
