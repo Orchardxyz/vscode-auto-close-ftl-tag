@@ -6,7 +6,7 @@ export function activate(context: vscode.ExtensionContext) {
         insertAutoCloseTag(event);
     });
 
-    let closeTag = vscode.commands.registerCommand('auto-close-tag.closeTag', () => {
+    let closeTag = vscode.commands.registerCommand('auto-close-ftl-tag.closeTag', () => {
         insertCloseTag();
     });
 
@@ -31,15 +31,16 @@ function insertAutoCloseTag(event: vscode.TextDocumentChangeEvent): void {
         return;
     }
 
-    let config = vscode.workspace.getConfiguration('auto-close-tag', editor.document.uri);
+    let config = vscode.workspace.getConfiguration('auto-close-ftl-tag', editor.document.uri);
     if (!config.get<boolean>("enableAutoCloseTag", true)) {
         return;
     }
 
     let languageId = editor.document.languageId;
+    let fileName = editor.document.fileName;
     let languages = config.get<string[]>("activationOnLanguage", ["*"]);
     let disableOnLanguage = config.get<string[]>("disableOnLanguage", []);
-    if ((languages.indexOf("*") === -1 && languages.indexOf(languageId) === -1) || disableOnLanguage.indexOf(languageId) !== -1) {
+    if (!fileName.endsWith('.ftl') && ((languages.indexOf("*") === -1 && languages.indexOf(languageId) === -1) || disableOnLanguage.indexOf(languageId) !== -1)) {
         return;
     }
 
@@ -78,7 +79,9 @@ function insertAutoCloseTag(event: vscode.TextDocumentChangeEvent): void {
         (enableAutoCloseSelfClosingTag && event.contentChanges[0].text === "/")) {
         let textLine = editor.document.lineAt(selection.start);
         let text = textLine.text.substring(0, selection.start.character + 1);
-        let result = /<([_a-zA-Z][a-zA-Z0-9:\-_.]*)(?:\s+[^<>]*?[^\s/<>=]+?)*?\s?(\/|>)$/.exec(text);
+        const htmlTagReg = /<([_a-zA-Z][a-zA-Z0-9:\-_.]*)(?:\s+[^<>]*?[^\s/<>=]+?)*?\s?(\/|>)$/;
+        const ftlTagReg = /<(#attempt|#autoesc|#compress|#escape|#function|#if|#list|#items|#macro|#noautoesc|#noparse|#outputformat|#switch)(?:\s+[^<>]*?[^\s/<>=]+?)*?\s?(\/|>)$/;
+        let result = (text.startsWith("<#") ? ftlTagReg : htmlTagReg).exec(text);
         if (result !== null && ((occurrenceCount(result[0], "'") % 2 === 0)
             && (occurrenceCount(result[0], "\"") % 2 === 0) && (occurrenceCount(result[0], "`") % 2 === 0))) {
             if (result[2] === ">") {
@@ -122,7 +125,7 @@ function insertCloseTag(): void {
 
     let selection = editor.selection;
     let originalPosition = selection.start;
-    let config = vscode.workspace.getConfiguration('auto-close-tag', editor.document.uri);
+    let config = vscode.workspace.getConfiguration('auto-close-ftl-tag', editor.document.uri);
     let excludedTags = config.get<string[]>("excludedTags", []);
     let text = editor.document.getText(new vscode.Range(new vscode.Position(0, 0), originalPosition));
     if (text.length > 2) {

@@ -1,10 +1,10 @@
 {
-    "name": "auto-close-tag",
-    "displayName": "Auto Close Tag",
-    "description": "Automatically add HTML/XML close tag, same as Visual Studio IDE or Sublime Text",
-    "version": "0.5.15",
-    "publisher": "formulahendry",
-    "icon": "images/logo.png",
+    "name": "auto-close-ftl-tag",
+    "displayName": "Auto Close FTL Tag",
+    "description": "Auto Close Tag for ftl file.",
+    "version": "1.0.0",
+    "author": "Orchard",
+    "publisher": "OrcaTeam",
     "engines": {
         "vscode": "^1.49.0"
     },
@@ -16,18 +16,16 @@
         "AutoComplete",
         "close",
         "tag",
-        "html",
-        "xml",
-        "multi-root ready"
+        "ftl"
     ],
     "bugs": {
-        "url": "https://github.com/formulahendry/vscode-auto-close-tag/issues",
-        "email": "formulahendry@gmail.com"
+        "url": "https://github.com/Orchardxyz/vscode-auto-close-ftl-tag/issues",
+        "email": "orchardyz@outlook.com"
     },
-    "homepage": "https://github.com/formulahendry/vscode-auto-close-tag/blob/master/README.md",
+    "homepage": "https://github.com/Orchardxyz/vscode-auto-close-ftl-tag/blob/master/README.md",
     "repository": {
         "type": "git",
-        "url": "https://github.com/formulahendry/vscode-auto-close-tag.git"
+        "url": "https://github.com/Orchardxyz/vscode-auto-close-ftl-tag.git"
     },
     "extensionKind": [
         "ui",
@@ -35,7 +33,7 @@
     ],
     "activationEvents": [
         "*",
-        "onCommand:auto-close-tag.closeTag"
+        "onCommand:auto-close-ftl-tag.closeTag"
     ],
     "main": "./out/src/extension",
     "capabilities": {
@@ -47,56 +45,36 @@
     "contributes": {
         "commands": [
             {
-                "command": "auto-close-tag.closeTag",
+                "command": "auto-close-ftl-tag.closeTag",
                 "title": "Close Tag"
             }
         ],
         "keybindings": [
             {
-                "command": "auto-close-tag.closeTag",
+                "command": "auto-close-ftl-tag.closeTag",
                 "key": "alt+.",
                 "mac": "cmd+alt+."
             }
         ],
         "configuration": {
             "type": "object",
-            "title": "Auto Close Tag configuration",
+            "title": "Auto Close FTL Tag configuration",
             "properties": {
-                "auto-close-tag.activationOnLanguage": {
+                "auto-close-ftl-tag.activationOnLanguage": {
                     "type": "array",
                     "default": [
-                        "xml",
-                        "php",
-                        "blade",
-                        "ejs",
-                        "glimmer-js",
-                        "glimmer-ts",
-                        "jinja",
-                        "javascript",
-                        "javascriptreact",
-                        "typescript",
-                        "typescriptreact",
-                        "plaintext",
-                        "markdown",
-                        "vue",
-                        "liquid",
-                        "erb",
-                        "lang-cfml",
-                        "cfml",
-                        "HTML (EEx)",
-                        "HTML (Eex)",
-                        "plist"
+                        "ftl"
                     ],
                     "description": "Set the languages that the extension will be activated.  e.g. [\"html\",\"xml\",\"php\"]. Use [\"*\"] to activate for all languages.",
                     "scope": "resource"
                 },
-                "auto-close-tag.disableOnLanguage": {
+                "auto-close-ftl-tag.disableOnLanguage": {
                     "type": "array",
                     "default": [],
                     "description": "Set the languages where the extension will be disabled.  e.g. [\"html\",\"xml\",\"php\"].",
                     "scope": "resource"
                 },
-                "auto-close-tag.excludedTags": {
+                "auto-close-ftl-tag.excludedTags": {
                     "type": "array",
                     "default": [
                         "area",
@@ -119,31 +97,31 @@
                     "description": "Set the tag list that would not be auto closed.",
                     "scope": "resource"
                 },
-                "auto-close-tag.SublimeText3Mode": {
+                "auto-close-ftl-tag.SublimeText3Mode": {
                     "type": "boolean",
                     "default": false,
                     "description": "Auto close tag when </ is typed, same as Sublime Text 3",
                     "scope": "resource"
                 },
-                "auto-close-tag.enableAutoCloseTag": {
+                "auto-close-ftl-tag.enableAutoCloseTag": {
                     "type": "boolean",
                     "default": true,
                     "description": "Whether to insert close tag automatically",
                     "scope": "resource"
                 },
-                "auto-close-tag.enableAutoCloseSelfClosingTag": {
+                "auto-close-ftl-tag.enableAutoCloseSelfClosingTag": {
                     "type": "boolean",
                     "default": true,
                     "description": "Whether to close self-closing tag automatically",
                     "scope": "resource"
                 },
-                "auto-close-tag.insertSpaceBeforeSelfClosingTag": {
+                "auto-close-ftl-tag.insertSpaceBeforeSelfClosingTag": {
                     "type": "boolean",
                     "default": false,
                     "description": "Insert a space before the forward slash in a self-closing tag.",
                     "scope": "resource"
                 },
-                "auto-close-tag.fullMode": {
+                "auto-close-ftl-tag.fullMode": {
                     "type": "boolean",
                     "default": false,
                     "description": "Enable both Visual Studio and Sublime Text mode",
