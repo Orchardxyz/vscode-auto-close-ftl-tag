@@ -4,7 +4,7 @@
     "description": "Auto Close Tag for ftl file.",
     "version": "1.0.2",
     "author": "Orchard",
-    "icon": "./assets/logo.png",
+    "icon": "assets/logo.png",
     "publisher": "OrcaTeam",
     "engines": {
         "vscode": "^1.49.0"
