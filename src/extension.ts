@@ -81,7 +81,7 @@ function insertAutoCloseTag(event: vscode.TextDocumentChangeEvent): void {
         let text = textLine.text.substring(0, selection.start.character + 1);
         const htmlTagReg = /<([_a-zA-Z][a-zA-Z0-9:\-_.]*)(?:\s+[^<>]*?[^\s/<>=]+?)*?\s?(\/|>)$/;
         const ftlTagReg = /<(#attempt|#autoesc|#compress|#escape|#function|#if|#list|#items|#macro|#noautoesc|#noparse|#outputformat|#switch)(?:\s+[^<>]*?[^\s/<>=]+?)*?\s?(\/|>)$/;
-        let result = (text.startsWith("<#") ? ftlTagReg : htmlTagReg).exec(text);
+        let result = (text.trim().startsWith("<#") ? ftlTagReg : htmlTagReg).exec(text);
         if (result !== null && ((occurrenceCount(result[0], "'") % 2 === 0)
             && (occurrenceCount(result[0], "\"") % 2 === 0) && (occurrenceCount(result[0], "`") % 2 === 0))) {
             if (result[2] === ">") {
