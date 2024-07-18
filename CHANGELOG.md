@@ -1,3 +1,9 @@
+## 1.0.2 (2024-07-18)
+
+### Fixed
+
+- Insert close tag failed when text has other characters.
+
 ## 1.0.1 (2024-07-18)
 
 ### Fixed
